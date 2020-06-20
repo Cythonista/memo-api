@@ -1,12 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.memo.memo-api.repository.mybatis.CardMapper">
+    <resultMap id="Card" type="com.memo.memo-api.domain.Card">
+        <id property="cardId" column="CARD_ID"/>
+        <result property="cardName" column="CARD_NAME"/>
+        <result property="overview" column="OVERVIEW"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="deleteFlag" column="DELETE_FLAG"/>
+    </resultMap>
+    <select id="find" resultMap="Card">
+        SELECT
+        CARD_ID,
+        CARD_NAME,
+        OVERVIEW,
+        UPDATED_AT,
+        DELETED_FLAG
+        FROM CARD
+    </select>
 
-</body>
-</html>
+    <select id="get" resultMap="Card">
+        SELECT
+        CARD_ID,
+        CARD_NAME,
+        OVERVIEW,
+        UPDATED_AT,
+        DELETED_FLAG
+        FROM  CARD
+        WHERE CARD_ID = #{cardId}
+        AND DELETE_FLAG = 0
+    </select>
+</mapper>
