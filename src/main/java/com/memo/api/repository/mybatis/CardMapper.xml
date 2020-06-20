@@ -3,7 +3,7 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.memo.api.repository.mybatis.CardMapper">
-    <resultMap id="Card" type="com.memo.memo-api.domain.Card">
+    <resultMap id="Card" type="com.memo.memo.domain.Card">
         <id property="cardId" column="CARD_ID"/>
         <result property="cardName" column="CARD_NAME"/>
         <result property="overview" column="OVERVIEW"/>
