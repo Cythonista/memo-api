@@ -16,7 +16,7 @@
         CARD_NAME,
         OVERVIEW,
         UPDATED_AT,
-        DELETED_FLAG
+        DELETE_FLAG
         FROM CARD
     </select>
 
@@ -26,7 +26,7 @@
         CARD_NAME,
         OVERVIEW,
         UPDATED_AT,
-        DELETED_FLAG
+        DELETE_FLAG
         FROM  CARD
         WHERE CARD_ID = #{cardId}
         AND DELETE_FLAG = 0

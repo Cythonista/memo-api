@@ -22,11 +22,7 @@ public class CardRestController {
     }
 
     @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CardList find(@RequestParam(name = "cardId", required = false) Long cardId) {
-        CardSelector cardSelector = new CardSelector();
-        if (cardId != null) {
-            cardSelector.setCardId(cardId);
-        }
+    public CardList find(CardSelector cardSelector) {
         return this.cardService.find(cardSelector);
     }
 
