@@ -1,6 +1,8 @@
 package com.memo.api.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.memo.api.ApiApplication;
 import com.memo.api.domain.Card;
 import com.memo.api.domain.CardSelector;
@@ -31,5 +33,17 @@ public class CardRepositoryImplDbUnitTest {
             assertEquals(4L, cards.get(3).getCardId());
             assertEquals(5L, cards.get(4).getCardId());
         }
+
+        @Test
+        public void testFindOne() {
+            Card card = target.findOne(1L);
+            assertNotNull(card);
+            assertEquals(1L, card.getCardId());
+            assertEquals("カード1", card.getCardName());
+            assertEquals("概要1", card.getOverview());
+        }
+
+        //@Test
+        //public void testGetException() {assertThrows(ResourceNotFoundException.class, () -> target.findOne(6L));}
     }
 }
