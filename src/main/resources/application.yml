@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/memo?useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=JST
+    username: user
+    password: password
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: memo
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+#------------------------------------------------------
+# MyBatis設定
+#------------------------------------------------------
+#mybatis:
+#  mapper-locations: classpath:jp/co/yahoo/knowledge/api/repository/mybatis/*.xml
+
+#------------------------------------------------------
+# ログ設定(SQL発行周りをデバッグログで見てみる)
+#------------------------------------------------------
+logging.level:
+  com.memo.api.repository: debug
+  org.springframework.jdbc.datasource.DataSourceTransactionManager: debug

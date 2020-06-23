@@ -1,0 +1,28 @@
+#------------------------------------------------------
+# Spring接続設定
+#------------------------------------------------------
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: memo
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+#------------------------------------------------------
+# MyBatis設定
+#------------------------------------------------------
+#mybatis:
+#  mapper-locations: classpath:jp/co/yahoo/knowledge/api/repository/mybatis/*.xml
+
+#------------------------------------------------------
+# ログ設定(SQL発行周りをデバッグログで見てみる)
+#------------------------------------------------------
+logging.level:
+  com.memo.api.repository: debug
+  org.springframework.jdbc.datasource.DataSourceTransactionManager: debug
