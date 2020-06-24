@@ -8,11 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "services/v1/cards")
+@RequestMapping(value = "")
 public class CardRestController {
 
     private final CardService cardService;
@@ -21,7 +20,7 @@ public class CardRestController {
         this.cardService = cardService;
     }
 
-    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public CardList find(CardSelector cardSelector) {
         return this.cardService.find(cardSelector);
     }
