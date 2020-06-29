@@ -43,8 +43,7 @@ public class CardServiceImpl implements CardService{
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public void remove(CardSelector cardSelector){
-        Card card = cardRepository.findOne(cardSelector.getCardId());
-        cardRepository.delete(card);
+        cardRepository.delete(cardSelector);
     }
 
 

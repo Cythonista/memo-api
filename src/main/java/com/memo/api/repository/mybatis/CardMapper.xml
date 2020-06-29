@@ -73,7 +73,8 @@
         UPDATED_AT = #{sysdate},
         DELETE_FLAG = 1
         WHERE
-        CARD_ID = #{cardId}
+            CARD_ID = #{cardId}
+            AND DELETE_FLAG = 0
     </update>
 
     <sql id="timestampVariable">

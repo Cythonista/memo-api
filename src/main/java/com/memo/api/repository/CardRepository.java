@@ -13,5 +13,5 @@ public interface CardRepository {
 
     void update(Card card);
 
-    void delete(Card card);
+    void delete(CardSelector cardSelector);
 }

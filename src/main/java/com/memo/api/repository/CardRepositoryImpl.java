@@ -47,11 +47,7 @@ public class CardRepositoryImpl implements CardRepository {
     }
 
     @Override
-    public void delete(Card card) {
-        int affected = this.sqlSession.getMapper(CardMapper.class).remove(card);
-        if(affected != 1) {
-            logger.info("Card not found. id={}", card.getCardId());
-            throw new ResourceNotFoundException("Card not found.");
-        }
+    public void delete(CardSelector cardSelector) {
+        this.sqlSession.getMapper(CardMapper.class).remove(cardSelector);
     }
 }
