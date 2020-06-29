@@ -3,6 +3,7 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.memo.api.repository.mybatis.CardMapper">
+
     <resultMap id="Card" type="com.memo.api.domain.Card">
         <id property="cardId" column="CARD_ID"/>
         <result property="cardName" column="CARD_NAME"/>
@@ -10,6 +11,7 @@
         <result property="updatedAt" column="UPDATED_AT"/>
         <result property="deleteFlag" column="DELETE_FLAG"/>
     </resultMap>
+
     <select id="find" resultMap="Card">
         SELECT
         CARD_ID,
@@ -31,4 +33,50 @@
         WHERE CARD_ID = #{cardId}
         AND DELETE_FLAG = 0
     </select>
+
+    <insert id="add" parameterType="com.memo.api.domain.Card" useGeneratedKeys="true" keyProperty="cardId">
+        <include refid="timestampVariable"/>
+        INSERT INTO CARD
+        (
+        CARD_NAME,
+        OVERVIEW,
+        UPDATED_AT,
+        DELETE_FLAG
+        )
+        VALUES
+        (
+        #{cardName},
+        #{overview},
+        #{sysdate},
+        0
+        )
+    </insert>
+
+    <update id="set" parameterType="com.memo.api.domain.Card">
+        <include refid="timestampVariable"/>
+        UPDATE
+        CARD
+        SET
+        CARD_NAME = #{cardName},
+        OVERVIEW = #{overview},
+        UPDATED_AT = #{sysdate}
+        WHERE
+        CARD_ID = #{cardId}
+        AND DELETE_FLAG = 0
+    </update>
+
+    <update id="remove" parameterType="com.memo.api.domain.Card">
+        <include refid="timestampVariable"/>
+        UPDATE
+        CARD
+        SET
+        UPDATED_AT = #{sysdate},
+        DELETE_FLAG = 1
+        WHERE
+        CARD_ID = #{cardId}
+    </update>
+
+    <sql id="timestampVariable">
+        <bind name="sysdate" value="@java.time.LocalDateTime@now()"/>
+    </sql>
 </mapper>

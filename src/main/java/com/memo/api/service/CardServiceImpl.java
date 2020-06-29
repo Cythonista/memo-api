@@ -5,6 +5,7 @@ import com.memo.api.domain.CardList;
 import com.memo.api.domain.CardSelector;
 import com.memo.api.repository.CardRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -23,7 +24,28 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card get(Long cardId) {
-        return cardRepository.findOne(cardId);
+    public Card get(CardSelector cardSelector) {
+        return cardRepository.findOne(cardSelector.getCardId());
     }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public void add(Card card){
+        cardRepository.insert(card);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public void set(Card card){
+        cardRepository.update(card);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public void remove(CardSelector cardSelector){
+        Card card = cardRepository.findOne(cardSelector.getCardId());
+        cardRepository.delete(card);
+    }
+
+
 }
