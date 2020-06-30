@@ -44,4 +44,41 @@ public class CardRepositoryImplTest {
         assertEquals(findResult, result);
         Mockito.verify(mapper, Mockito.times(1)).find(selector);
     }
+
+    @Test
+    public void testGet(){
+        Long input = 100L;
+        Card findResult = new Card();
+        Mockito.doReturn(findResult).when(mapper).get(input);
+
+        Card result = new CardRepositoryImpl(this.sqlSession).findOne(input);
+        assertEquals(findResult, result);
+        Mockito.verify(mapper, Mockito.times(1)).get(input);
+    }
+
+    @Test
+    public void testAdd() {
+        Card input = new Card();
+        Mockito.doReturn(1).when(mapper).add(input);
+        new CardRepositoryImpl(this.sqlSession).insert(input);
+        Mockito.verify(mapper, Mockito.times(1)).add(input);
+    }
+
+    @Test
+    public void testSet() {
+        Card input = new Card();
+        Mockito.doReturn(1).when(mapper).set(input);
+        new CardRepositoryImpl(this.sqlSession).update(input);
+        Mockito.verify(mapper, Mockito.times(1)).set(input);
+    }
+
+    @Test
+    public void testRemove() {
+        CardSelector cardSelector = new CardSelector();
+        cardSelector.setCardId(100L);
+        Mockito.doReturn(1).when(mapper).remove(cardSelector);
+        new CardRepositoryImpl(this.sqlSession).delete(cardSelector);
+        Mockito.verify(mapper, Mockito.times(1)).remove(cardSelector);
+    }
+
 }
