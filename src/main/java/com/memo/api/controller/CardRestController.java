@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "/services/v1")
 public class CardRestController {
 
     private final CardService cardService;
@@ -30,8 +30,8 @@ public class CardRestController {
     }
 
     @GetMapping(path="/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Card get(@PathVariable CardSelector cardSelector) {
-        return this.cardService.get(cardSelector);
+    public Card get(@PathVariable Long cardId) {
+        return this.cardService.get(cardId);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,13 +40,13 @@ public class CardRestController {
     }
 
     @PatchMapping(path="/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void set(@PathVariable CardSelector cardSelector, @RequestBody Card card) {
-        card.setCardId(cardSelector.getCardId());
+    public void set(@PathVariable Long cardId, @RequestBody Card card) {
+        card.setCardId(cardId);
         this.cardService.set(card);
     }
 
     @DeleteMapping(path="/{cardId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void remove(@PathVariable CardSelector cardSelector){
-        this.cardService.remove(cardSelector);
+    public void remove(@PathVariable Long cardId){
+        this.cardService.remove(cardId);
     }
 }

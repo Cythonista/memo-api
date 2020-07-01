@@ -39,15 +39,14 @@ public class CardServiceImplTest {
 
         @Test
         public void testGet() {
-            CardSelector cardSelector = new CardSelector();
-            cardSelector.setCardId(100L);
+            Long input = 100L;
             Card findResult = new Card();
-            Mockito.doReturn(findResult).when(cardRepository).findOne(cardSelector.getCardId());
+            Mockito.doReturn(findResult).when(cardRepository).findOne(input);
             CardServiceImpl target = new CardServiceImpl(cardRepository);
-            Card result = target.get(cardSelector);
+            Card result = target.get(input);
 
             assertEquals(findResult, result);
-            Mockito.verify(cardRepository, Mockito.times(1)).findOne(cardSelector.getCardId());
+            Mockito.verify(cardRepository, Mockito.times(1)).findOne(input);
         }
 
         @Test
@@ -73,14 +72,15 @@ public class CardServiceImplTest {
 
         @Test
         public void testRemove() {
-            CardSelector cardSelector = new CardSelector();
-            cardSelector.setCardId(100L);
-            Mockito.doNothing().when(cardRepository).delete(cardSelector);
+            Long id = 100L;
+            Card card = new Card();
+            Mockito.doReturn(card).when(cardRepository).findOne(id);
+            Mockito.doNothing().when(cardRepository).delete(card);
             CardServiceImpl target = new CardServiceImpl(cardRepository);
 
-            target.remove(cardSelector);
+            target.remove(id);
 
-            Mockito.verify(cardRepository, Mockito.times(1)).delete(cardSelector);
+            Mockito.verify(cardRepository, Mockito.times(1)).delete(card);
         }
     }
 }

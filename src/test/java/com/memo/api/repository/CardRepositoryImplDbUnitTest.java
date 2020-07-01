@@ -117,9 +117,8 @@ public class CardRepositoryImplDbUnitTest {
 
         @Test
         public void testDelete() {
-            CardSelector cardSelector = new CardSelector();
-            cardSelector.setCardId(5L);
-            target.delete(cardSelector);
+            Card card = target.findOne(5L);
+            target.delete(card);
             DbUnitUtil.assertMutateResult(
                     dataSource,
                     "CARD",

@@ -74,11 +74,10 @@ public class CardRepositoryImplTest {
 
     @Test
     public void testRemove() {
-        CardSelector cardSelector = new CardSelector();
-        cardSelector.setCardId(100L);
-        Mockito.doReturn(1).when(mapper).remove(cardSelector);
-        new CardRepositoryImpl(this.sqlSession).delete(cardSelector);
-        Mockito.verify(mapper, Mockito.times(1)).remove(cardSelector);
+        Card input = new Card();
+        Mockito.doReturn(1).when(mapper).remove(input);
+        new CardRepositoryImpl(this.sqlSession).delete(input);
+        Mockito.verify(mapper, Mockito.times(1)).remove(input);
     }
 
 }

@@ -24,8 +24,8 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card get(CardSelector cardSelector) {
-        return cardRepository.findOne(cardSelector.getCardId());
+    public Card get(Long cardId) {
+        return cardRepository.findOne(cardId);
     }
 
     @Override
@@ -42,8 +42,9 @@ public class CardServiceImpl implements CardService{
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public void remove(CardSelector cardSelector){
-        cardRepository.delete(cardSelector);
+    public void remove(Long cardId){
+        Card card = cardRepository.findOne(cardId);
+        cardRepository.delete(card);
     }
 
 

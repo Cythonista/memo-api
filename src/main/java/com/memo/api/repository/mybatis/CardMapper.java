@@ -12,5 +12,5 @@ public interface CardMapper {
     Card get(@Param("cardId") Long cardId);
     int add(Card card);
     int set(Card card);
-    int remove(CardSelector selector);
+    int remove(Card card);
 }

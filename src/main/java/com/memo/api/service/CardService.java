@@ -7,8 +7,8 @@ import com.memo.api.domain.CardSelector;
 public interface CardService {
     CardList find(CardSelector cardSelector);
     //CardList find(@Param("cardId") Long cardId);
-    Card get(CardSelector cardSelector);
+    Card get(Long cardId);
     void add(Card card);
     void set(Card card);
-    void remove(CardSelector cardSelector);
+    void remove(Long cardId);
 }
