@@ -10,4 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface CardMapper {
     List<Card> find(CardSelector cardSelector);
     Card get(@Param("cardId") Long cardId);
+    int add(Card card);
+    int set(Card card);
+    int remove(Card card);
 }

@@ -11,7 +11,7 @@ public class Card {
     private String cardName;
     private String overview;
     private LocalDateTime updatedAt;
-    private boolean deleteFlag;
+    private Boolean deleteFlag;
 
     public Long getCardId() {
         return cardId;
@@ -45,11 +45,11 @@ public class Card {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isDeleteFlag() {
+    public Boolean getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(boolean deleteFlag) {
+    public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 }

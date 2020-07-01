@@ -28,8 +28,30 @@ public class CardRepositoryImpl implements CardRepository {
         Card card = this.sqlSession.getMapper(CardMapper.class).get(cardId);
         if (card == null) {
             logger.info("Card not found. id = {}", cardId);
-            //throw new ResourceNotFoundException("Card not found.");
+            throw new ResourceNotFoundException("Card not found.");
         }
         return card;
+    }
+    @Override
+    public void insert(Card card) {
+        this.sqlSession.getMapper(CardMapper.class).add(card);
+    }
+
+    @Override
+    public void update(Card card) {
+        int affected = this.sqlSession.getMapper(CardMapper.class).set(card);
+        if(affected != 1) {
+            logger.info("Card not found. id={}", card.getCardId());
+            throw new ResourceNotFoundException("Card not found.");
+        }
+    }
+
+    @Override
+    public void delete(Card card) {
+        int affected = this.sqlSession.getMapper(CardMapper.class).remove(card);
+        if(affected != 1) {
+            logger.info("Card not found. id={}", card.getCardId());
+            throw new ResourceNotFoundException("Card not found.");
+        }
     }
 }

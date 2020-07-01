@@ -8,4 +8,7 @@ public interface CardService {
     CardList find(CardSelector cardSelector);
     //CardList find(@Param("cardId") Long cardId);
     Card get(Long cardId);
+    void add(Card card);
+    void set(Card card);
+    void remove(Long cardId);
 }
