@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/services/v1")
+@RequestMapping(value = "/v1")
 public class CardRestController {
 
     private final CardService cardService;
