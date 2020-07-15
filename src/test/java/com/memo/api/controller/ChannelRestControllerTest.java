@@ -32,6 +32,8 @@ public class ChannelRestControllerTest {
 
     private MockMvc mockMvc;
 
+    private String endPoint = "/v1/card";
+
     @BeforeEach
     public void before() {
         MockitoAnnotations.initMocks(this);
@@ -48,7 +50,7 @@ public class ChannelRestControllerTest {
         Mockito.doReturn(findResult).when(cardService).find(Mockito.argThat(matcher));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .get("/services/v1/list")
+                .get(endPoint)
                 .param("cardId", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -67,7 +69,7 @@ public class ChannelRestControllerTest {
         Mockito.doReturn(findResult).when(cardService).find(Mockito.argThat(matcher));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .get("/services/v1/list"))
+                .get(endPoint))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
@@ -81,7 +83,7 @@ public class ChannelRestControllerTest {
         Card getResult = new Card();
         Mockito.doReturn(getResult).when(cardService).get(input);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .get("/services/v1/"+input.toString()))
+                .get(endPoint+ "/" +input.toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         assertEquals(UnitTestUtil.entity2JsonText(getResult), result.getResponse().getContentAsString());
@@ -94,7 +96,7 @@ public class ChannelRestControllerTest {
         Mockito.doNothing().when(cardService).add(ArgumentMatchers.any(Card.class));
         // when: 対象のAPIリクエストを実行
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post("/services/v1/")
+                .post(endPoint)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(UnitTestUtil.entity2JsonText(new Card())));
         // then: テスト結果の検証。戻り値、Mockの呼び出し方法、回数など
@@ -112,7 +114,7 @@ public class ChannelRestControllerTest {
         Mockito.doNothing().when(cardService).set(Mockito.argThat(matcher));
         // when: 対象のAPIリクエストを実行
         mockMvc.perform(MockMvcRequestBuilders
-                .patch("/services/v1/10")
+                .patch(endPoint+"/10")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(UnitTestUtil.entity2JsonText(new Card())));
         // then: テスト結果の検証。戻り値、Mockの呼び出し方法、回数など
@@ -128,7 +130,7 @@ public class ChannelRestControllerTest {
         Long id = 10L;
         Mockito.doNothing().when(cardService).remove(id);
         // when: 対象のAPIリクエストを実行
-        mockMvc.perform(MockMvcRequestBuilders.delete("/services/v1/10"));
+        mockMvc.perform(MockMvcRequestBuilders.delete(endPoint+"/10"));
         // then: テスト結果の検証。戻り値、Mockの呼び出し方法、回数など
         Mockito.verify(cardService, Mockito.times(1)).remove(id);
     }

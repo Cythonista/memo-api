@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/v1")
+@RequestMapping(value = "/v1/card")
 public class CardRestController {
 
     private final CardService cardService;
@@ -24,7 +24,7 @@ public class CardRestController {
         this.cardService = cardService;
     }
 
-    @GetMapping(path="/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="", produces = MediaType.APPLICATION_JSON_VALUE)
     public CardList find(CardSelector cardSelector) {
         return this.cardService.find(cardSelector);
     }
@@ -34,7 +34,7 @@ public class CardRestController {
         return this.cardService.get(cardId);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path="", produces = MediaType.APPLICATION_JSON_VALUE)
     public void add(@RequestBody Card card) {
         this.cardService.add(card);
     }
